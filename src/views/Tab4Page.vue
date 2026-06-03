@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Perfil</ion-title>
+        <ion-title>Sobre</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -10,13 +10,24 @@
 
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Usuário</ion-card-title>
+          <ion-card-title>
+            Álbum Digital da Copa
+          </ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <p><strong>Nome:</strong> Jogador da Copa</p>
-          <p><strong>Email:</strong> usuario@email.com</p>
-          <p><strong>Figurinhas coletadas:</strong> {{ coletadas }}</p>
+
+          Projeto desenvolvido em
+          Vue + Ionic.
+
+          <br><br>
+
+         Codificar aplicações para dispositivos móveis
+
+          <br><br>
+
+          Aluno: Amábile Luz
+
         </ion-card-content>
       </ion-card>
 
@@ -36,13 +47,4 @@ import {
   IonCardTitle,
   IonCardContent
 } from '@ionic/vue'
-
-import { computed } from 'vue'
-import { useAlbum } from '@/composables/useAlbum'
-
-const { lista } = useAlbum()
-
-const coletadas = computed(() =>
-  lista.value.filter(item => item.coletada).length
-)
 </script>

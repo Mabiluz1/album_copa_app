@@ -1,23 +1,80 @@
 <template>
   <ion-page>
+
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 2</ion-title>
+        <ion-title>Coleção</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-      <ExploreContainer name="Tab 2 page" />
+    <ion-content>
+
+      <ion-segment v-model="filtro">
+
+        <ion-segment-button value="todas">
+          <ion-label>Todas</ion-label>
+        </ion-segment-button>
+
+        <ion-segment-button value="coletadas">
+          <ion-label>Coletadas</ion-label>
+        </ion-segment-button>
+
+        <ion-segment-button value="pendentes">
+          <ion-label>Pendentes</ion-label>
+        </ion-segment-button>
+
+      </ion-segment>
+
+      <StickerCard
+  v-for="figurinha in listaFiltrada"
+  :key="figurinha.id"
+  :figurinha="figurinha"
+  @toggle="marcarColetada(figurinha.id)"
+/>
+
     </ion-content>
+
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel
+} from '@ionic/vue'
+
+import { ref, computed } from 'vue'
+import StickerCard from '@/components/StickerCard.vue'
+import { useAlbum } from '@/composables/useAlbum'
+
+const {
+  lista,
+  marcarColetada
+} = useAlbum()
+
+const filtro = ref('todas')
+
+const listaFiltrada = computed(() => {
+
+  if (filtro.value === 'coletadas') {
+    return lista.value.filter(
+      item => item.coletada
+    )
+  }
+
+  if (filtro.value === 'pendentes') {
+    return lista.value.filter(
+      item => !item.coletada
+    )
+  }
+
+  return lista.value
+
+})
 </script>
