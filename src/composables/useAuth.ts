@@ -1,6 +1,11 @@
 import { ref } from 'vue'
 
 const usuarios = ref<any[]>([])
+const usuarioLogado = ref({
+    nome: null,
+    email: null,
+    senha: null,
+  })
 
 export function useAuth() {
 
@@ -12,11 +17,15 @@ export function useAuth() {
     email:string,
     senha:string
   ){
-    return usuarios.value.find(
+    const usuario = usuarios.value.find(
       user =>
       user.email === email &&
       user.senha === senha
     )
+    if (usuario){
+      usuarioLogado.value = usuario
+    }
+    return usuario
   }
 
   function resetarSenha(
@@ -34,6 +43,7 @@ export function useAuth() {
     cadastrar,
     login,
     resetarSenha,
-    logout
+    logout,
+    usuarioLogado
   }
 }

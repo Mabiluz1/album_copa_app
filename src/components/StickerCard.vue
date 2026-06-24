@@ -61,3 +61,8 @@ const emit = defineEmits<{
   (e: 'toggle'): void
 }>()
 </script>
+
+<style scooped>
+
+
+</style>

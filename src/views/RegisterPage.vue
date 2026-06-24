@@ -48,12 +48,14 @@ IonButton
 
 import { ref } from 'vue'
 import { useAuth } from '@/composables/useAuth'
+import { useIonRouter } from '@ionic/vue'
 
 const { cadastrar } = useAuth()
 
 const nome = ref('')
 const email = ref('')
 const senha = ref('')
+const route = useIonRouter()
 
 function salvar(){
 
@@ -69,5 +71,14 @@ function salvar(){
   })
 
   alert('Cadastro realizado!')
+
+  route.push (
+    {
+      path: '/login'
+    }
+  )
+
 }
+
+
 </script>
